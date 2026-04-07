@@ -36,7 +36,41 @@ class QuizGame:
 
     def play_quiz(self):
         """1번: 퀴즈 푸는 기능"""
-        pass
+        # 퀴즈가 하나도 없을 때를 대비한 방어막입니다.
+        if len(self.quizzes) == 0:
+            print("\n⚠️ 등록된 퀴즈가 없습니다. 퀴즈를 먼저 추가해주세요!")
+            return
+
+        print(f"\n📝 퀴즈를 시작합니다! (총 {len(self.quizzes)}문제)")
+        print("-" * 40)
+        
+        score = 0  # 내 점수를 기록할 상자를 0으로 시작합니다.
+        
+        # 장바구니에서 퀴즈를 하나씩 꺼내옵니다.
+        for i, quiz in enumerate(self.quizzes):
+            print(f"\n[문제 {i+1}] {quiz.question}")
+            
+            # 보기 4개도 화면에 하나씩 띄워줍니다.
+            for j, choice in enumerate(quiz.choices):
+                print(f"{j+1}. {choice}")
+            
+            # 사용자에게 정답을 입력받습니다.
+            user_answer = input("정답 입력 (1~4): ")
+            
+            # 내가 입력한 답과 실제 정답이 같은지 비교합니다! (input은 문자라서 문자로 비교)
+            if user_answer == str(quiz.answer):
+                print("✅ 정답입니다!")
+                score += 1  # 정답이면 점수를 1점 올립니다.
+            else:
+                print(f"❌ 틀렸습니다! (정답: {quiz.answer}번)")
+        
+        print("-" * 40)
+        print(f"🏆 결과: {len(self.quizzes)}문제 중 {score}문제 정답!")
+        
+        # 최고 점수 갱신 기능
+        if score > self.best_score:
+            print("🎉 새로운 최고 점수입니다!")
+            self.best_score = score
 
     def add_quiz(self):
         """2번: 퀴즈 추가하는 기능"""
@@ -71,7 +105,7 @@ def main():
         
         # 2. 사용자가 선택한 번호에 따라 다른 행동을 합니다. (조건문 if/elif/else)
         if choice == '1':
-            print("\n준비 중인 기능입니다! (퀴즈 풀기)")
+            game.play_quiz()
         elif choice == '2':
             print("\n준비 중인 기능입니다! (퀴즈 추가)")
         elif choice == '3':

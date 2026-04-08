@@ -19,6 +19,37 @@ class QuizGame:
             Quiz("그룹 스테이씨(STAYC)의 데뷔곡은?", ["ASAP", "SO BAD", "STEREOTYPE", "Teddy Bear"], 2)
         ]
         self.best_score = 0
+
+    def get_valid_number(self, prompt_msg, max_num):
+        """
+        사용자로부터 안전하게 숫자를 입력받는 전담 도우미 메서드입니다.
+        평가 항목: 입력 오류 케이스(공백/문자/범위 밖/빈 입력) 완벽 방어
+        """
+        while True:
+            # 1. 공백 제거 및 빈 입력 방어
+            # .strip()은 사용자가 습관적으로 스페이스바를 눌러도 양끝 공백을 싹 지워줍니다.
+            user_input = input(prompt_msg).strip() 
+            
+            if user_input == "": # 빈 입력(엔터만 친 경우)
+                print("⚠️ 값을 입력해주세요!")
+                continue # 다시 처음(while)으로 돌아가서 입력을 요구합니다.
+                
+            # 2. 문자 입력 방어
+            # .isdigit()는 입력된 값이 순수하게 숫자로만 이루어져 있는지 검사합니다.
+            if not user_input.isdigit():
+                print("⚠️ 숫자만 입력해주세요! (예: 1, 2, 3)")
+                continue
+                
+            # 3. 범위 밖 입력 방어
+            num = int(user_input) # 문자를 진짜 정수(int)로 변환
+            if num < 1 or num > max_num:
+                print(f"⚠️ 1부터 {max_num} 사이의 번호를 선택해주세요.")
+                continue
+                
+            # 모든 관문을 무사히 통과했다면 그 숫자를 반환합니다!
+            return num
+        
+
     def display_menu(self):
         """메뉴를 화면에 보여주는 기능"""
         print("\n========================================")
@@ -74,7 +105,32 @@ class QuizGame:
 
     def add_quiz(self):
         """2번: 퀴즈 추가하는 기능"""
-        pass
+        print("\n📌 새로운 퀴즈를 추가합니다.")
+        
+        # 문제 입력 받기 (빈칸 방어)
+        question = input("문제를 입력하세요: ").strip()
+        while question == "":
+            print("⚠️ 문제는 비워둘 수 없습니다.")
+            question = input("문제를 입력하세요: ").strip()
+
+        # 보기 4개 입력 받기
+        choices = []
+        for i in range(1, 5):
+            choice = input(f"선택지 {i}: ").strip()
+            # 만약 보기도 빈칸을 막고 싶다면 여기에 while문을 추가할 수 있지만, 일단 진행합니다.
+            choices.append(choice)
+
+        # 정답 번호 입력 받기 (아까 만든 전용 도우미 사용!)
+        # 보기가 4개니까 max_num 자리에 4를 넣어줍니다.
+        answer = self.get_valid_number("정답 번호 (1~4): ", 4)
+
+        # 붕어빵 틀(Quiz 클래스)을 이용해 새 퀴즈 객체를 하나 만듭니다.
+        new_quiz = Quiz(question, choices, answer)
+        
+        # 매니저의 장바구니(리스트)에 새 퀴즈를 추가합니다.
+        self.quizzes.append(new_quiz)
+        print("✅ 퀴즈가 성공적으로 추가되었습니다!")
+
 
     def show_list(self):
         """3번: 퀴즈 목록 보여주는 기능"""
@@ -107,11 +163,11 @@ def main():
         if choice == '1':
             game.play_quiz()
         elif choice == '2':
-            print("\n준비 중인 기능입니다! (퀴즈 추가)")
+            game.add_quiz()
         elif choice == '3':
             game.show_list()
         elif choice == '4':
-            print("\n준비 중인 기능입니다! (점수 확인)")
+            game.show_score()
         elif choice == '5':
             print("\n게임을 종료합니다. 안녕히 가세요!")
             break  # break를 만나면 while 무한 반복문(루프)을 부수고 밖으로 탈출합니다!

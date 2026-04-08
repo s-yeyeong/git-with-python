@@ -160,22 +160,36 @@ class QuizGame:
 def main():
     game = QuizGame()
     
-    while True:
-        choice = game.display_menu()
+    # 튼튼한 에어백(try)으로 게임 전체를 감싸줍니다!
+    try:
+        while True:
+            choice = game.display_menu()
+            
+            if choice == '1':
+                game.play_quiz()
+            elif choice == '2':
+                game.add_quiz()
+            elif choice == '3':
+                game.show_list()
+            elif choice == '4':
+                game.show_score()
+            elif choice == '5':
+                print("\n게임을 종료합니다. 안녕히 가세요!")
+                break
+            else:
+                print("\n⚠️ 잘못된 입력입니다. 1~5 사이의 숫자를 입력하세요.")
+                
+    # 사용자가 키보드로 Ctrl + C 를 눌러서 강제 종료를 시도할 때!
+    except KeyboardInterrupt:
+        print("\n\n🚨 강제 종료(Ctrl+C)가 감지되었습니다!")
+        print("안전하게 데이터를 장부에 저장하고 게임을 끕니다. 삐빅-")
+        game.save_data() # 죽기 직전에 장부에 기록!
         
-        if choice == '1':
-            game.play_quiz()
-        elif choice == '2':
-            game.add_quiz()
-        elif choice == '3':
-            game.show_list()
-        elif choice == '4':
-            game.show_score()
-        elif choice == '5':
-            print("\n게임을 종료합니다. 안녕히 가세요!")
-            break  
-        else:
-            print("\n⚠️ 잘못된 입력입니다. 1~5 사이의 숫자를 입력하세요.")
+    # (Mac 등에서 Ctrl + D 를 눌렀을 때를 대비한 추가 방어)
+    except EOFError:
+        print("\n\n🚨 입력 스트림이 끊겼습니다(EOF).")
+        print("안전하게 데이터를 장부에 저장하고 게임을 끕니다. 삐빅-")
+        game.save_data()
 
 if __name__ == "__main__":
     main()

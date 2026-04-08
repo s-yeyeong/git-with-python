@@ -1,0 +1,65 @@
+{
+    "best_score": 0,
+    "quizzes": [
+        {
+            "question": "걸그룹 아이브(IVE)의 데뷔곡 제목은?",
+            "choices": [
+                "ELEVEN",
+                "LOVE DIVE",
+                "After LIKE",
+                "I AM"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "다음 중 블랙핑크(BLACKPINK)의 멤버가 아닌 사람은?",
+            "choices": [
+                "지수",
+                "제니",
+                "로제",
+                "윈터"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "그룹 (여자)아이들의 히트곡 'Super Lady'가 수록된 앨범 이름은?",
+            "choices": [
+                "I feel",
+                "I do",
+                "2",
+                "I love"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "그룹 에스파(aespa)의 세계관에서 멤버들의 또 다른 자아를 부르는 명칭은?",
+            "choices": [
+                "MY",
+                "ae",
+                "SYNK",
+                "P.O.S"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "그룹 스테이씨(STAYC)의 데뷔곡은?",
+            "choices": [
+                "ASAP",
+                "SO BAD",
+                "STEREOTYPE",
+                "Teddy Bear"
+            ],
+            "answer": 2
+        },
+        {
+            "question": "노래 맞기",
+            "choices": [
+                "이",
+                "너",
+                "러",
+                "기"
+            ],
+            "answer": 3
+        }
+    ]
+}

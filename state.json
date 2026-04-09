@@ -1,5 +1,5 @@
 {
-    "best_score": 0,
+    "best_score": 4,
     "quizzes": [
         {
             "question": "걸그룹 아이브(IVE)의 데뷔곡 제목은?",
@@ -50,6 +50,16 @@
                 "Teddy Bear"
             ],
             "answer": 2
+        },
+        {
+            "question": "아이브 멤버 중 지구오락실에 나오는 사람은?",
+            "choices": [
+                "유진",
+                "이서",
+                "원영",
+                "리즈"
+            ],
+            "answer": 1
         }
     ]
 }

@@ -50,16 +50,6 @@
                 "Teddy Bear"
             ],
             "answer": 2
-        },
-        {
-            "question": "노래 맞기",
-            "choices": [
-                "이",
-                "너",
-                "러",
-                "기"
-            ],
-            "answer": 3
         }
     ]
 }

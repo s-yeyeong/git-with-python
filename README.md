@@ -32,7 +32,7 @@ git-with-python/
 ├── main.py          # 게임 로직, 퀴즈 관리 클래스 및 실행 메인 루프
 ├── state.json       # 퀴즈 데이터 및 최고 점수가 저장되는 JSON 장부
 ├── .gitignore       # Git 관리에서 제외할 설정 및 캐시 파일 목록
-└── README.md        # 프로젝트 설명서 (현재 파일)
+└── README.md        # 프로젝트 설명서
 ```
 
 ##  데이터 파일 설명 (state.json)
@@ -53,3 +53,5 @@ git-with-python/
     ]
 }
 ```
+
+* 본 프로젝트는 Git Clone 및 Pull 실습이 완료된 저장소입니다.

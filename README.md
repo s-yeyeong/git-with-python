@@ -57,3 +57,4 @@ git-with-python/
 # clone 과 pull 실습 흔적
 
 # git log --oneline --graph 결과
+* Git Merge 시뮬레이션 완료

@@ -54,4 +54,6 @@ git-with-python/
 }
 ```
 
-* 본 프로젝트는 Git Clone 및 Pull 실습이 완료된 저장소입니다.
+# clone 과 pull 실습 흔적
+
+# git log --oneline --graph 결과

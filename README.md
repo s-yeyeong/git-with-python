@@ -54,8 +54,8 @@ git-with-python/
 }
 ```
 
-# clone 과 pull 실습 흔적
+## clone 과 pull 실습 흔적
  "Docs: 복제된 저장소에서 README 내용 추가"
 
-# git log --oneline --graph 결과
+## git log --oneline --graph 결과
  ![실행결과 스크린샷](image-1.png)

@@ -1,5 +1,5 @@
 {
-    "best_score": 4,
+    "best_score": 5,
     "quizzes": [
         {
             "question": "걸그룹 아이브(IVE)의 데뷔곡 제목은?",
@@ -60,6 +60,16 @@
                 "리즈"
             ],
             "answer": 1
+        },
+        {
+            "question": "하츠투하츠의 신곡 이름은?",
+            "choices": [
+                "odd",
+                "캐치 캐치",
+                "RUDE!",
+                "404"
+            ],
+            "answer": 3
         }
     ]
 }

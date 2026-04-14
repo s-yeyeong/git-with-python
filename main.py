@@ -25,7 +25,7 @@ class QuizGame:
         self.load_data()  # 매니저가 태어나자마자 가장 먼저 장부부터 읽어옵니다!
 
     def load_data(self):
-    """장부 파일 복구 및 초기화 기능"""
+        """장부 파일 복구 및 초기화 기능"""
         try:
             with open(self.data_file, 'r', encoding='utf-8') as file:
                 data = json.load(file) 
@@ -105,8 +105,8 @@ class QuizGame:
             for j, choice in enumerate(quiz.choices):
                 print(f"{j+1}. {choice}")
             
-            user_answer = input("정답 입력 (1~4): ")
-            if user_answer == str(quiz.answer):
+            user_answer = self.get_valid_number("정답 입력 (1~4): ", 4)
+            if int(user_answer) == quiz.answer:
                 print("✅ 정답입니다!")
                 score += 1  
             else:

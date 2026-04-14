@@ -25,32 +25,33 @@ class QuizGame:
         self.load_data()  # 매니저가 태어나자마자 가장 먼저 장부부터 읽어옵니다!
 
     def load_data(self):
-        """장부(JSON) 파일에서 기존 데이터를 읽어오는 기능"""
-        try: 
+    """장부 파일 복구 및 초기화 기능"""
+        try:
             with open(self.data_file, 'r', encoding='utf-8') as file:
                 data = json.load(file) 
-                
-                self.best_score = data["best_score"]
-                for q in data["quizzes"]:
-                    quiz_obj = Quiz(q["question"], q["choices"], q["answer"])
-                    self.quizzes.append(quiz_obj)
+                self.best_score = data.get("best_score", 0)
+                for q in data.get("quizzes", []):
+                    self.quizzes.append(Quiz(q["question"], q["choices"], q["answer"]))
                     
-                print(f"📂 장부를 성공적으로 불러왔습니다! (퀴즈 {len(self.quizzes)}개)")
-
         except FileNotFoundError:
-            print("📂 장부가 없어서 새로운 K-pop 기본 장부를 생성합니다.")
-            self.quizzes = [
-                Quiz("걸그룹 아이브(IVE)의 데뷔곡 제목은?", ["ELEVEN", "LOVE DIVE", "After LIKE", "I AM"], 1),
-                Quiz("다음 중 블랙핑크(BLACKPINK)의 멤버가 아닌 사람은?", ["지수", "제니", "로제", "윈터"], 4),
-                Quiz("그룹 (여자)아이들의 히트곡 'Super Lady'가 수록된 앨범 이름은?", ["I feel", "I do", "2", "I love"], 3),
-                Quiz("그룹 에스파(aespa)의 세계관에서 멤버들의 또 다른 자아를 부르는 명칭은?", ["MY", "ae", "SYNK", "P.O.S"], 2),
-                Quiz("그룹 스테이씨(STAYC)의 데뷔곡은?", ["ASAP", "SO BAD", "STEREOTYPE", "Teddy Bear"], 2)
-            ]
-            self.save_data() 
-
+            print("⚠️ 데이터 파일이 없습니다. 기본 K-pop 퀴즈로 시작합니다.")
+            self.set_default_quizzes() # 아래에서 만든 기본 세팅 함수 호출
+            
         except json.JSONDecodeError:
-            print("⚠️ 장부 파일이 손상되었습니다. 퀴즈가 0개인 상태로 시작합니다.")
-
+            print("⚠️ 데이터 파일이 손상되었습니다! 기본 퀴즈로 복구(초기화)합니다.")
+            self.set_default_quizzes() # 파일이 고장 났을 때도 기본값으로 덮어씀
+    
+    def set_default_quizzes(self):
+        """기본 퀴즈 데이터를 세팅하고 저장하는 전용 함수"""
+        self.quizzes = [
+            Quiz("걸그룹 아이브(IVE)의 데뷔곡 제목은?", ["ELEVEN", "LOVE DIVE", "After LIKE", "I AM"], 1),
+            Quiz("다음 중 블랙핑크(BLACKPINK)의 멤버가 아닌 사람은?", ["지수", "제니", "로제", "윈터"], 4),
+            Quiz("그룹 (여자)아이들의 히트곡 'Super Lady'가 수록된 앨범 이름은?", ["I feel", "I do", "2", "I love"], 3),
+            Quiz("그룹 에스파(aespa)의 세계관에서 멤버들의 또 다른 자아를 부르는 명칭은?", ["MY", "ae", "SYNK", "P.O.S"], 2),
+            Quiz("그룹 스테이씨(STAYC)의 데뷔곡은?", ["ASAP", "SO BAD", "STEREOTYPE", "Teddy Bear"], 2)
+        ]
+        self.save_data() # 세팅 후 즉시 저장하여 파일 복구 완료
+    
     def save_data(self):
         """현재 장바구니와 점수를 장부(JSON) 파일에 덮어쓰는 기능"""
         data_to_save = {
@@ -68,7 +69,7 @@ class QuizGame:
                 print("⚠️ 값을 입력해주세요!")
                 continue 
             if not user_input.isdigit():
-                print("⚠️ 숫자만 입력해주세요! (예: 1, 2, 3)")
+                print("⚠️ 숫자만 입력해주세요!")
                 continue
             num = int(user_input) 
             if num < 1 or num > max_num:
@@ -86,7 +87,7 @@ class QuizGame:
         print("4. 점수 확인")
         print("5. 종료")
         print("========================================")
-        choice = input("선택: ") 
+        choice = input("선택: ").strip() 
         return choice
 
     def play_quiz(self):
